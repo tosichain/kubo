@@ -1,4 +1,4 @@
-name: 'interop'
+name: Interop
 
 on:
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
         with:
           name: kubo
           path: cmd/ipfs/ipfs
-  ipfs-interop:
+  interop:
     needs: [prepare]
     runs-on: ubuntu-latest
     strategy:

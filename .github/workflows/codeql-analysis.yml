@@ -12,9 +12,8 @@ on:
     - cron: '30 12 * * 2'
 
 jobs:
-  analyze:
+  go:
     if: github.repository == 'ipfs/kubo' || github.event_name == 'workflow_dispatch'
-    name: Analyze
     runs-on: ubuntu-latest
 
     strategy:
