@@ -11,7 +11,6 @@ jobs:
   check:
     if: github.repository == 'ipfs/kubo' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    name: All
     steps:
       - uses: actions/checkout@v2
         with:
