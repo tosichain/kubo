@@ -247,7 +247,7 @@ test_set_address_vars() {
     API_ADDR=$(convert_tcp_maddr $API_MADDR) &&
     API_PORT=$(port_from_maddr $API_MADDR) &&
 
-    GWAY_MADDR=$(sed -n "s/^Gateway (.*) server listening on //p" "$daemon_output") &&
+    [ -z "${GWAY_MADDR_OVERWRITE}" ] && GWAY_MADDR=$(sed -n "s/^Gateway (.*) server listening on //p" "$daemon_output") || GWAY_MADDR=${GWAY_MADDR_OVERWRITE} &&
     GWAY_ADDR=$(convert_tcp_maddr $GWAY_MADDR) &&
     GWAY_PORT=$(port_from_maddr $GWAY_MADDR)
   '
