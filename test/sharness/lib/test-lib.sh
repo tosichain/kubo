@@ -202,7 +202,9 @@ test_init_ipfs() {
 
   test_expect_success "ipfs init succeeds" '
     export IPFS_PATH="$(pwd)/.ipfs" &&
-    ipfs init --profile=test > /dev/null
+    ipfs init --profile=test > /dev/null &&
+    ([ ! -z $TEST_NODE_GWAY_MADDR ] && ipfs config Addresses.Gateway $TEST_NODE_GWAY_MADDR || true) &&
+    ([ ! -z $TEST_NODE_API_MADDR ] && ipfs config Addresses.API $TEST_NODE_API_MADDR || true)
   '
 
   test_expect_success "prepare config -- mounting" '
@@ -247,7 +249,7 @@ test_set_address_vars() {
     API_ADDR=$(convert_tcp_maddr $API_MADDR) &&
     API_PORT=$(port_from_maddr $API_MADDR) &&
 
-    [ -z "${GWAY_MADDR_OVERWRITE}" ] && GWAY_MADDR=$(sed -n "s/^Gateway (.*) server listening on //p" "$daemon_output") || GWAY_MADDR=${GWAY_MADDR_OVERWRITE} &&
+    [ -z "${TEST_GWAY_MADDR}" ] && GWAY_MADDR=$(sed -n "s/^Gateway (.*) server listening on //p" "$daemon_output") || GWAY_MADDR=${TEST_GWAY_MADDR} &&
     GWAY_ADDR=$(convert_tcp_maddr $GWAY_MADDR) &&
     GWAY_PORT=$(port_from_maddr $GWAY_MADDR)
   '
