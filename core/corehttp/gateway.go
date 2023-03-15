@@ -171,7 +171,7 @@ func offlineErrWrap(err error) error {
 	return err
 }
 
-func (o *offlineGatewayErrWrapper) Get(ctx context.Context, path gateway.ImmutablePath) (gateway.ContentPathMetadata, files.Node, error) {
+func (o *offlineGatewayErrWrapper) Get(ctx context.Context, path gateway.ImmutablePath) (gateway.ContentPathMetadata, *gateway.GetResponse, error) {
 	md, n, err := o.gwimpl.Get(ctx, path)
 	err = offlineErrWrap(err)
 	return md, n, err
