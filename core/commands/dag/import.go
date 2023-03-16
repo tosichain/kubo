@@ -161,7 +161,7 @@ func importWorker(req *cmds.Request, re cmds.ResponseEmitter, api iface.CoreAPI,
 		err := func() error {
 			defer file.Close()
 
-			car, err := gocarv2.NewBlockReader(file)
+			car, err := gocarv2.NewBlockReader(file, gocarv2.ZeroLengthSectionAsEOF(true))
 			if err != nil {
 				return err
 			}
