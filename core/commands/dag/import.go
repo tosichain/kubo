@@ -73,7 +73,7 @@ func dagImport(req *cmds.Request, res cmds.ResponseEmitter, env cmds.Environment
 			// this won't/can't help with not running out of handles
 			defer file.Close()
 
-			car, err := gocarv2.NewBlockReader(file)
+			car, err := gocarv2.NewBlockReader(file, gocarv2.WithTrustedCAR(true))
 			if err != nil {
 				return err
 			}
